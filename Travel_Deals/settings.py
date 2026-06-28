@@ -57,11 +57,11 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # store sessions in DB
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 14  # 2 weeks
 SESSION_SAVE_EVERY_REQUEST = True  # refresh session on every request
 
-# LOGIN_URL = '/auth/login/'
+LOGIN_URL = '/auth/login/'
 
-# LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
-# LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 ROOT_URLCONF = 'Travel_Deals.urls'
