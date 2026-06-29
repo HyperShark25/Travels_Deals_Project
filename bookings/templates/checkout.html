@@ -1,0 +1,9 @@
+<form method="post">
+  {% csrf_token %}
+  {% if not user.is_authenticated %}
+    <input type="text"  name="name"  placeholder="Full name"    required>
+    <input type="email" name="email" placeholder="Email address" required>
+  {% endif %}
+  <p>Package: {{ package.title }} — ${{ package.price }}</p>
+  <button type="submit">Proceed to payment</button>
+</form>
