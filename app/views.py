@@ -5,10 +5,6 @@ from django.contrib import messages
 from .forms import SignUpForm
 
 
-def home(request):
-    return render(request, 'home.html', {})
-
-
 def login_user(request):
     if request.user.is_authenticated:
         return redirect('home')

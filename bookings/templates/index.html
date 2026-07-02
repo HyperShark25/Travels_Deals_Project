@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Featured Deals Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-weight: 700">Featured Deals</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm rounded-4">
+          <div class="bg-primary" style="height: 200px"></div>
+          <div class="card-body">
+            <h5 class="card-title">{{ package.name }}</h5>
+            <p class="card-text">
+              Discover breathtaking beaches and luxury resorts at unbeatable
+              prices.
+            </p>
+            <a href="#" class="btn btn-primary">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm rounded-4">
+          <div class="bg-success" style="height: 200px"></div>
+          <div class="card-body">
+            <h5 class="card-title">{{ package.name }}</h5>
+            <p class="card-text">
+              Experience thrilling mountain expeditions with expert guides
+              included.
+            </p>
+            <a href="#" class="btn btn-success">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm rounded-4">
+          <div class="bg-danger" style="height: 200px"></div>
+          <div class="card-body">
+            <h5 class="card-title">{{ package.name }}</h5>
+            <p class="card-text">
+              Explore vibrant cities with curated tours and exclusive
+              accommodations.
+            </p>
+            <a href="#" class="btn btn-danger">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-weight: 700">
+      Why Choose Travels & Deals?
+    </h2>
+    <div class="row g-4">
+      <div class="col-md-3 text-center">
+        <div class="mb-3">
+          <i
+            class="bi bi-percent"
+            style="font-size: 2.5rem; color: #0d6efd"
+          ></i>
+        </div>
+        <h5>Best Prices</h5>
+        <p class="text-muted">
+          Guaranteed lowest prices on travel packages and bookings.
+        </p>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="mb-3">
+          <i
+            class="bi bi-shield-check"
+            style="font-size: 2.5rem; color: #198754"
+          ></i>
+        </div>
+        <h5>Secure Booking</h5>
+        <p class="text-muted">
+          Safe and encrypted transactions for peace of mind.
+        </p>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="mb-3">
+          <i
+            class="bi bi-headset"
+            style="font-size: 2.5rem; color: #fd7e14"
+          ></i>
+        </div>
+        <h5>24/7 Support</h5>
+        <p class="text-muted">
+          Our team is always here to help with any questions.
+        </p>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="mb-3">
+          <i class="bi bi-globe" style="font-size: 2.5rem; color: #dc3545"></i>
+        </div>
+        <h5>Global Coverage</h5>
+        <p class="text-muted">
+          Destinations across the world at your fingertips.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partner Travel Companies Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-weight: 700;">Our Partner Companies</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm rounded-4">
+          <div class="card-body text-center">
+            <div style="font-size: 3rem; color: #0066cc; margin-bottom: 15px;">✈️</div>
+            <h5 class="card-title">SkyWings Travel</h5>
+            <p class="text-muted">Specializing in international flights and luxury resorts with 20+ years of experience.</p>
+            <p style="font-weight: 600; color: #0066cc;">Rating: ⭐⭐⭐⭐⭐ (4.8/5)</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm rounded-4">
+          <div class="card-body text-center">
+            <div style="font-size: 3rem; color: #009900; margin-bottom: 15px;">🏖️</div>
+            <h5 class="card-title">Wanderlust Holidays</h5>
+            <p class="text-muted">Expert beach and island vacations with all-inclusive packages and personalized service.</p>
+            <p style="font-weight: 600; color: #009900;">Rating: ⭐⭐⭐⭐⭐ (4.9/5)</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm rounded-4">
+          <div class="card-body text-center">
+            <div style="font-size: 3rem; color: #cc6600; margin-bottom: 15px;">🏔️</div>
+            <h5 class="card-title">Adventure Trails</h5>
+            <p class="text-muted">Thrilling adventure tours including trekking, skiing, and extreme sports packages.</p>
+            <p style="font-weight: 600; color: #cc6600;">Rating: ⭐⭐⭐⭐ (4.7/5)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Vacation Packages Section -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-weight: 700;">Popular Vacation Packages</h2>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm rounded-4 border-0">
+          <div class="row g-0">
+            <div class="col-md-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ package.name }}</h5>
+                <p class="card-text text-muted">{{ package.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
+                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #0d6efd;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
+                  </div>
+                  <button class="btn btn-primary btn-sm rounded-3">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm rounded-4 border-0">
+          <div class="row g-0">
+            <div class="col-md-4" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ package.name }}</h5>
+                <p class="card-text text-muted">{{ package.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
+                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #198754;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
+                  </div>
+                  <button class="btn btn-success btn-sm rounded-3">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm rounded-4 border-0">
+          <div class="row g-0">
+            <div class="col-md-4" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ package.name }}</h5>
+                <p class="card-text text-muted">{{ package.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
+                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #fd7e14;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
+                  </div>
+                  <button class="btn btn-warning btn-sm rounded-3">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm rounded-4 border-0">
+          <div class="row g-0">
+            <div class="col-md-4" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ package.name }}</h5>
+                <p class="card-text text-muted">{{ package.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
+                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #dc3545;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
+                  </div>
+                  <button class="btn btn-danger btn-sm rounded-3">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

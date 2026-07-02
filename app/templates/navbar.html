@@ -1,0 +1,27 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"
+      >Home</a
+    >
+  </li>
+  {% if user.is_authenticated %}
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'my_bookings' %}"
+      >My Bookings</a
+    >
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+  </li>
+  {% else %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'guest_bookings' %}">My Bookings</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'login' %}">Log in</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'register' %}">Register</a>
+  </li>
+  {% endif %}
+</ul>

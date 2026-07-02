@@ -1,6 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Booking, VacationPackage
+from .models import *
+
+
+def index(request):
+    bookings = Booking.objects.all()
+    VacationPackages = VacationPackage.objects.all()
+    return render(request, 'index.html', {'bookings': bookings, 'vacation_packages': VacationPackages})
+
+
+def package_detail_view(request, package_id):
+    package = get_object_or_404(VacationPackage, id=package_id)
+    return render(request, 'bookings/package_detail.html', {'package': package})
+
+
+def company_detail_view(request, company_id):
+    company = get_object_or_404(TravelCompany, id=company_id)
+    return render(request, 'bookings/company_detail.html', {'company': company})
 
 
 def checkout_view(request, package_id):
@@ -71,8 +87,8 @@ def booking_confirmation_view(request, pk):
 
 @login_required
 def my_bookings_view(request):    
-    # The select_related('package__company') is used to optimize database queries by fetching related package and company data in a single query, reducing
-    # the number of database hits(It does not change the result of the query at all, it just helps the performance).
+    # The select_related('package__company') is used to optimize database queries by fetching related package and company data in a
+    # single query, reducing the number of database hits(It does not change the result of the query at all, it just helps the performance).
     # Finally, we order the bookings by their creation date in descending order so that the most recent bookings appear first.
     bookings = Booking.objects.filter(user=request.user).select_related('package__company').order_by('-created_at')
     return render(request, 'bookings/my_bookings.html', {'bookings': bookings})
