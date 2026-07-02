@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Success Message -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">
+                    <i class="fas fa-check-circle"></i> Booking Confirmed!
+                </h4>
+                <p>Thank you for your booking. Your reservation has been recorded.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Booking Details Card -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-ticket-alt"></i> Booking Confirmation
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Booking ID -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Booking ID</h6>
+                            <p class="fs-5 fw-bold">{{ booking.id }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Status</h6>
+                            <p class="fs-5 fw-bold">
+                                {% if booking.status == 'pending' %}
+                                    <span class="badge bg-warning">{{ booking.get_status_display }}</span>
+                                {% elif booking.status == 'Paid' %}
+                                    <span class="badge bg-success">{{ booking.get_status_display }}</span>
+                                {% else %}
+                                    <span class="badge bg-danger">{{ booking.get_status_display }}</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Package Details -->
+                    <div class="mb-4">
+                        <h5 class="mb-3">Package Details</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-muted">Package Title</h6>
+                                <p class="fs-6 fw-bold">{{ booking.package.title }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-muted">Company</h6>
+                                <p class="fs-6 fw-bold">
+                                    <a href="{% url 'company_detail' booking.package.company.id %}" class="text-decoration-none">
+                                        {{ booking.package.company.name }}
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h6 class="text-muted">Start Date</h6>
+                                <p class="fs-6">{{ booking.package.start_date|date:"d M Y" }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-muted">End Date</h6>
+                                <p class="fs-6">{{ booking.package.end_date|date:"d M Y" }}</p>
+                            </div>
+                        </div>
+
+                        {% if booking.package.description %}
+                            <div class="mt-3">
+                                <h6 class="text-muted">Description</h6>
+                                <p class="fs-6">{{ booking.package.description }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <hr>
+
+                    <!-- Pricing -->
+                    <div class="mb-4">
+                        <h6 class="text-muted">Total Price</h6>
+                        <p class="fs-5 fw-bold text-success">{{ booking.package.price }} EGP</p>
+                    </div>
+
+                    <!-- Booking Date -->
+                    <div class="mb-4">
+                        <h6 class="text-muted">Booking Date</h6>
+                        <p class="fs-6">{{ booking.created_at|date:"d M Y \a\t H:i" }}</p>
+                    </div>
+
+                    <!-- Guest or User Info -->
+                    {% if booking.user %}
+                        <div class="mb-4">
+                            <h6 class="text-muted">Booked by</h6>
+                            <p class="fs-6">{{ booking.user.first_name }} {{ booking.user.last_name }}</p>
+                        </div>
+                    {% elif booking.guest_name %}
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h6 class="text-muted">Guest Name</h6>
+                                <p class="fs-6">{{ booking.guest_name }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-muted">Guest Email</h6>
+                                <p class="fs-6">{{ booking.guest_email }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4 d-flex gap-2 justify-content-center">
+                <a href="{% url 'index' %}" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'my_bookings' %}" class="btn btn-info">
+                        <i class="fas fa-list"></i> View My Bookings
+                    </a>
+                {% else %}
+                    <a href="{% url 'guest_bookings' %}" class="btn btn-info">
+                        <i class="fas fa-list"></i> View My Bookings
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

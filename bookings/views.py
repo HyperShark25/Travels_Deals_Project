@@ -19,6 +19,7 @@ def company_detail_view(request, company_id):
     return render(request, 'bookings/company_detail.html', {'company': company})
 
 
+# Come back to this function later to add payment integration with Paymob
 def checkout_view(request, package_id):
     package = get_object_or_404(VacationPackage, id=package_id)
 
