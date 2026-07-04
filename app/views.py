@@ -23,7 +23,7 @@ def login_user(request):
     
     else:
         messages.error(request, 'Invalid username or password. Please try again.')
-        return render(request, 'accounts/login.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
 
 
 def register_user(request):
@@ -40,7 +40,7 @@ def register_user(request):
     else:
         messages.success(
             request, 'Registration failed. Please correct the errors below.')
-        return render(request, 'accounts/register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
 
 
 
@@ -72,4 +72,3 @@ def _claim_guest_bookings(request, user):
         # We are filtering the bookings by session_key and user__isnull=True to find the bookings that were made by
         # the guest user and not yet claimed by any authenticated user.
         Booking.objects.filter(session_key=session_key, user__isnull=True).update(user=user)
-    

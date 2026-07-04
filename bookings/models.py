@@ -7,6 +7,12 @@ class TravelCompany(models.Model):
     name = models.CharField(max_length=100, unique=True)
     logo = models.ImageField(upload_to='logos/', blank=True, null=True)
     description = models.TextField(max_length=1000, blank=True, null=True)
+    managers = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name='managed_companies',
+        help_text='Staff members who can manage this travel company.'
+    )
 
     def __str__(self):
         return self.name
@@ -45,6 +51,7 @@ class Booking(models.Model):
     guest_name = models.CharField(max_length=100, blank=True, null=True)
     guest_email = models.EmailField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    paymob_order_id = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     session_key = models.CharField(max_length=40, blank=True, null=True)
 
