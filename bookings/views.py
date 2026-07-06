@@ -17,8 +17,8 @@ def home(request):
     return render(request, 'index.html', {'bookings': bookings, 'vacation_packages': VacationPackages})
 
 
-def package_detail_view(request, package_id):
-    package = get_object_or_404(VacationPackage, id=package_id)
+def package_detail_view(request, pk):
+    package = get_object_or_404(VacationPackage, id=pk)
     return render(request, 'package_detail.html', {'package': package})
 
 

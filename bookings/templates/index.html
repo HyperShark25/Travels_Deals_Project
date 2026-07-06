@@ -5,47 +5,24 @@
   <div class="container">
     <h2 class="text-center mb-5" style="font-weight: 700">Featured Deals</h2>
     <div class="row g-4">
+      {% for package in vacation_packages|slice:":3" %}
       <div class="col-md-4">
         <div class="card h-100 shadow-sm rounded-4">
           <div class="bg-primary" style="height: 200px"></div>
           <div class="card-body">
-            <h5 class="card-title">{{ package.name }}</h5>
-            <p class="card-text">
-              Discover breathtaking beaches and luxury resorts at unbeatable
-              prices.
-            </p>
-            <a href="#" class="btn btn-primary">Learn More</a>
+            <h5 class="card-title">{{ package.title }}</h5>
+            <p class="card-text">{{ package.description|truncatechars:120 }}</p>
+            <p class="mb-3"><strong>${{ package.price|floatformat:2 }}</strong></p>
+            <a href="{% url 'package_detail' package.id %}" class="btn btn-primary">Learn More</a>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm rounded-4">
-          <div class="bg-success" style="height: 200px"></div>
-          <div class="card-body">
-            <h5 class="card-title">{{ package.name }}</h5>
-            <p class="card-text">
-              Experience thrilling mountain expeditions with expert guides
-              included.
-            </p>
-            <a href="#" class="btn btn-success">Learn More</a>
-          </div>
-        </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="alert alert-info text-center">No vacation packages available yet.</div>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm rounded-4">
-          <div class="bg-danger" style="height: 200px"></div>
-          <div class="card-body">
-            <h5 class="card-title">{{ package.name }}</h5>
-            <p class="card-text">
-              Explore vibrant cities with curated tours and exclusive
-              accommodations.
-            </p>
-            <a href="#" class="btn btn-danger">Learn More</a>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
-
   </div>
 </section>
 
@@ -149,86 +126,32 @@
   <div class="container">
     <h2 class="text-center mb-5" style="font-weight: 700;">Popular Vacation Packages</h2>
     <div class="row g-4">
+      {% for package in vacation_packages %}
       <div class="col-lg-6">
         <div class="card h-100 shadow-sm rounded-4 border-0">
           <div class="row g-0">
             <div class="col-md-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{ package.name }}</h5>
+                <h5 class="card-title">{{ package.title }}</h5>
                 <p class="card-text text-muted">{{ package.description }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
-                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #0d6efd;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
+                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #0d6efd;">${{ package.price|floatformat:2 }}</strong></p>
                   </div>
-                  <button class="btn btn-primary btn-sm rounded-3">Book Now</button>
+                  <a href="{% url 'package_detail' package.id %}" class="btn btn-primary btn-sm rounded-3">Book Now</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
-        <div class="card h-100 shadow-sm rounded-4 border-0">
-          <div class="row g-0">
-            <div class="col-md-4" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{ package.name }}</h5>
-                <p class="card-text text-muted">{{ package.description }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
-                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #198754;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
-                  </div>
-                  <button class="btn btn-success btn-sm rounded-3">Book Now</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="alert alert-info text-center">No vacation packages available yet.</div>
       </div>
-      <div class="col-lg-6">
-        <div class="card h-100 shadow-sm rounded-4 border-0">
-          <div class="row g-0">
-            <div class="col-md-4" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{ package.name }}</h5>
-                <p class="card-text text-muted">{{ package.description }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
-                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #fd7e14;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
-                  </div>
-                  <button class="btn btn-warning btn-sm rounded-3">Book Now</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="card h-100 shadow-sm rounded-4 border-0">
-          <div class="row g-0">
-            <div class="col-md-4" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{ package.name }}</h5>
-                <p class="card-text text-muted">{{ package.description }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <p class="mb-0"><small>Company: {{ package.company.name }}</small></p>
-                    <p class="mb-0"><strong style="font-size: 1.3rem; color: #dc3545;">${{ package.price|floatformat:2 }}</strong> <span class="text-decoration-line-through text-muted">${{ package.original_price|floatformat:2 }}</span></p>
-                  </div>
-                  <button class="btn btn-danger btn-sm rounded-3">Book Now</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>

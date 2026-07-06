@@ -3,44 +3,50 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib import messages
 from .forms import SignUpForm
-
+# User: User
+# Password for User: dasknfo23n!
 
 def login_user(request):
     if request.user.is_authenticated:
         return redirect('home')
-    
-    form = AuthenticationForm(request, data=request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        user = form.get_user()
-        login(request, user)
-        messages.success(request, 'You have successfully logged in.')
-    
-        # After login, claim any guest bookings or reservations associated with the session
-        _claim_guest_bookings(request, user)
-        
-        # next parameter is used to redirect the user to the page they were trying to access before login
-        return redirect(request.GET.get('next', 'home'))  # Redirect to the next page or home
-    
-    else:
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, 'You have successfully logged in.')
+
+            # After login, claim any guest bookings or reservations associated with the session
+            _claim_guest_bookings(request, user)
+
+            # next parameter is used to redirect the user to the page they were trying to access before login
+            return redirect(request.GET.get('next', 'home'))  # Redirect to the next page or home
+
         messages.error(request, 'Invalid username or password. Please try again.')
-        return render(request, 'login.html', {'form': form})
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
 
 
 def register_user(request):
-    form = SignUpForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        user = form.save()
-        login(request, user)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
 
-        _claim_guest_bookings(request, user)
+            _claim_guest_bookings(request, user)
 
-        messages.success(
-            request, 'User created successfully.')
-        return redirect('home')
+            messages.success(request, 'User created successfully.')
+            return redirect('home')
+
+        messages.error(request, 'Registration failed. Please correct the errors below.')
     else:
-        messages.success(
-            request, 'Registration failed. Please correct the errors below.')
-        return render(request, 'register.html', {'form': form})
+        form = SignUpForm()
+
+    return render(request, 'register.html', {'form': form})
 
 
 
