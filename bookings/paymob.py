@@ -49,11 +49,7 @@ def get_payment_key(auth_token, paymob_order_id, amount_cents, billing_data):
     return response.json()['token']
 
 
-def verify_hmac(data: dict) -> bool:
-    """
-    Concatenate specific fields in a fixed order,
-    then compare HMAC-SHA512 with Paymob's hmac value.
-    """
+def verify_hmac(transaction: dict, incoming_hmac: str) -> bool:
     hmac_fields = [
         'amount_cents', 'created_at', 'currency', 'error_occured',
         'has_parent_transaction', 'id', 'integration_id', 'is_3d_secure',
@@ -62,10 +58,29 @@ def verify_hmac(data: dict) -> bool:
         'source_data_pan', 'source_data_sub_type', 'source_data_type',
         'success',
     ]
-    concatenated = ''.join(str(data.get(field, '')) for field in hmac_fields)
+
+    flat = {
+        **transaction,
+        'order':                str(transaction.get('order', {}).get('id', '')),
+        'source_data_pan':      transaction.get('source_data', {}).get('pan', ''),
+        'source_data_sub_type': transaction.get('source_data', {}).get('sub_type', ''),
+        'source_data_type':     transaction.get('source_data', {}).get('type', ''),
+    }
+
+    def format_value(v):
+        if isinstance(v, bool):
+            return str(v).lower()  # True → 'true', False → 'false'
+        return str(v)
+
+    concatenated = ''.join(format_value(flat.get(field, '')) for field in hmac_fields)
+
     expected = hmac.new(
         settings.PAYMOB_HMAC_SECRET.encode(),
         concatenated.encode(),
         hashlib.sha512,
     ).hexdigest()
-    return hmac.compare_digest(expected, data.get('hmac', ''))
+
+    print("Expected HMAC:", expected)
+    print("Incoming HMAC:", incoming_hmac)
+
+    return hmac.compare_digest(expected, incoming_hmac)

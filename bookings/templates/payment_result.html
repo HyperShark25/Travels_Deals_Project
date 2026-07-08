@@ -1,7 +1,13 @@
 {% if success %}
   <h2>Payment successful!</h2>
   <p>Your booking is confirmed.</p>
-  <a href="{% url 'my_bookings' %}">View my bookings</a>
+  {% if user.is_authenticated %}
+    <p>Thank you for booking with us, {{ user.first_name }}!</p>
+    <a href="{% url 'my_bookings' %}">View my bookings</a>
+  {% else %}
+    <p>Thank you for booking with us!</p>
+    <a href="{% url 'guest_bookings' %}">View my bookings</a>
+  {% endif %}
 {% else %}
   <h2>Payment failed</h2>
   <p>Something went wrong. Please try again.</p>

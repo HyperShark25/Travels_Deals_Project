@@ -16,15 +16,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-PAYMOB_API_KEY        = os.environ.get('PAYMOB_API_KEY')
-PAYMOB_INTEGRATION_ID = os.environ.get('PAYMOB_INTEGRATION_ID')
-PAYMOB_IFRAME_ID      = os.environ.get('PAYMOB_IFRAME_ID')
-PAYMOB_HMAC_SECRET    = os.environ.get('PAYMOB_HMAC_SECRET')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+PAYMOB_API_KEY = os.environ.get('PAYMOB_API_KEY')
+PAYMOB_INTEGRATION_ID = os.environ.get('PAYMOB_INTEGRATION_ID')
+PAYMOB_IFRAME_ID = os.environ.get('PAYMOB_IFRAME_ID')
+PAYMOB_HMAC_SECRET = os.environ.get('PAYMOB_HMAC_SECRET')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -35,7 +35,14 @@ SECRET_KEY = 'django-insecure-e=lgrk)$$&r5c+u0#2+h%bjx^w_$zhs5yxej-nh6e#z*b83s_e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.trycloudflare.com',
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 
 # Application definition

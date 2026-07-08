@@ -65,7 +65,7 @@
                                     <td>
                                         {% if booking.status == 'pending' %}
                                             <span class="badge bg-warning">{{ booking.get_status_display }}</span>
-                                        {% elif booking.status == 'Paid' %}
+                                        {% elif booking.status == 'paid' %}
                                             <span class="badge bg-success">{{ booking.get_status_display }}</span>
                                         {% else %}
                                             <span class="badge bg-danger">{{ booking.get_status_display }}</span>

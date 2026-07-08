@@ -40,7 +40,7 @@ class VacationPackage(models.Model):
 class Booking(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
-        ('Paid', 'Paid'),
+        ('paid', 'Paid'),
         ('cancelled', 'Cancelled'),
     ]
     package = models.ForeignKey(VacationPackage, on_delete=models.CASCADE)

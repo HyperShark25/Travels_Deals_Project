@@ -35,12 +35,15 @@ def payment_callback_view(request):
     data = json.loads(request.body)
     transaction = data.get('obj', {})
 
-    # Verify HMAC — reject anything that doesn't match
-    if not paymob.verify_hmac(request.GET):
-        return HttpResponse(status=403)
+    # Extract the incoming HMAC from the transaction data
+    incoming_hmac = request.GET.get('hmac', '')
 
+    # Verify HMAC — reject anything that doesn't match
+    if not paymob.verify_hmac(transaction, incoming_hmac):
+        return HttpResponse(status=403)
+    
     paymob_order_id = str(transaction.get('order', {}).get('id', ''))
-    success         = transaction.get('success', False)
+    success = transaction.get('success', False)
 
     try:
         booking = Booking.objects.get(paymob_order_id=paymob_order_id)
@@ -59,7 +62,7 @@ def payment_response(request):
     Use this only to show a message — don't update booking status here.
     """
     success = request.GET.get('success') == 'true'
-    return render(request, 'bookings/payment_result.html', {'success': success})
+    return render(request, 'payment_result.html', {'success': success})
 
 
 # Come back to this function later to add payment integration with Paymob
