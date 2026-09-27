@@ -18,11 +18,11 @@ def login_user(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
+            # After login, claim any guest bookings or reservations associated with the session
+            _claim_guest_bookings(request, user)
             login(request, user)
             messages.success(request, 'You have successfully logged in.')
 
-            # After login, claim any guest bookings or reservations associated with the session
-            _claim_guest_bookings(request, user)
 
             # next parameter is used to redirect the user to the page they were trying to access before login
             return redirect(request.GET.get('next', 'home'))  # Redirect to the next page or home
@@ -36,19 +36,19 @@ def login_user(request):
 
 def register_user(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = SignUpForm(request.POST) # This is to render the form with the data the user has entered (Hence Post request).
         if form.is_valid():
             user = form.save()
+            _claim_guest_bookings(request, user)
             login(request, user)
 
-            _claim_guest_bookings(request, user)
 
             messages.success(request, 'User created successfully.')
             return redirect('home')
 
         messages.error(request, 'Registration failed. Please correct the errors below.')
     else:
-        form = SignUpForm()
+        form = SignUpForm() # This is to render an empty form when the user first visits the registration page (Hence Get request).
 
     return render(request, 'register.html', {'form': form})
 
