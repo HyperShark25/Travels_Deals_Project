@@ -3,8 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib import messages
 from .forms import SignUpForm
+
 # User: User
 # Password for User: dasknfo23n!
+
+# User: admin2
+# Password for admin2: vgkig67o86o8
 
 def login_user(request):
     if request.user.is_authenticated:
